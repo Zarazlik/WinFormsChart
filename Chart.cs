@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace PetriaChivilisation.Viewing
+namespace WindowsForms.Charting
 {
     internal class Chart
     {
@@ -46,11 +46,8 @@ namespace PetriaChivilisation.Viewing
                 Points[i] = new Point(PolesPositions[i] + MinIndent, (int)(PictureBox.Height - (Values[i] * factor)) - (MinIndent + 1));
             }
 
-
             Image image = DrawChartLine(Color.Red, Points);
-            image.Save("C:\\Users\\Zaraz\\OneDrive\\Рабочий стол\\555.png");
-            PictureBox.Image = image;
-            
+            PictureBox.Image = image;   
         }
 
         void DrawGread()
@@ -86,7 +83,6 @@ namespace PetriaChivilisation.Viewing
                 }
             }
         }
-
         
         Image DrawChartLine(Color color, Point[] points)
         {
@@ -99,6 +95,5 @@ namespace PetriaChivilisation.Viewing
 
             return image;
         }
-        
     }
 }
