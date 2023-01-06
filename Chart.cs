@@ -1,26 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
-namespace TransferСalculation
+namespace WinFormsChart
 {
-    //TODO 1. Добавить обработку null с перескакиванием столбца 2.Добавить лейблы 3. Сделать крупкю сетку читаеемее с помощь замутнения некоторых промежуточных линий сетки
-
-    internal class Chart
+    public partial class Chart : UserControl
     {
-        byte ChartStile;
+        #region
+        public enum ChartStile { Line }
+        [Description("Type of visual"), Category("Chart")]
+        public ChartStile chartStile { get; set; }
 
-        PictureBox PictureBox;
+        [Category("Chart")]
+        public short NumberOfPoles { get; set; }
+
+        [Category("Chart")]
+        public int MaxValue { get; set; }
+
+        [Category("Chart")]
+        public int MinValue { get; set; }
+
+        [Category("Chart")]
+        public float GreadVolumeStap { get; set; }
+        #endregion
+
         Image Table;
-
-        short NumberOfPoles;
-
-        int MaxValue, MinValue;
-        float GreadVolumeStap;
 
         byte MinIndent = 3;
         int IndentX;
@@ -37,18 +47,19 @@ namespace TransferСalculation
             Color.LightBlue
         };
 
-        public Chart(PictureBox pictureBox, short NumberOfPoles, int MinValue, int MaxValue, float GreadVolumeStap)
+        public Chart()
         {
-            PictureBox = pictureBox;
-            this.NumberOfPoles = NumberOfPoles;
-            this.MaxValue = MaxValue;
-            this.MinValue = MinValue;
-            this.GreadVolumeStap = GreadVolumeStap;
+            InitializeComponent();
+        }
+
+        private void UserControl1_Load(object sender, EventArgs e)
+        {
             PolesPositions = new ushort[NumberOfPoles];
 
             DrawGread();
-            pictureBox.Image = Table;
+            PictureBox.Image = Table;
         }
+
 
         public void Update(double[] Values, Color color)
         {
@@ -65,10 +76,10 @@ namespace TransferСalculation
             PictureBox.Image = image;
         }
 
+        
         public void Update(double[][] Values)
         {
-            // Line
-            if (ChartStile == 0)
+            if (chartStile == ChartStile.Line)
             {
                 int palettecell = -1;
                 foreach (double[] mas in Values)
@@ -86,11 +97,6 @@ namespace TransferСalculation
                     Image image = DrawChartLine(Palette[palettecell], Points);
                     PictureBox.Image = image;
                 }
-            }
-            // Pillows
-            else
-            {
-
             }
         }
 
@@ -110,8 +116,8 @@ namespace TransferСalculation
                 for (int i = 0; i < NumberOfPoles; i++)
                 {
                     graphics.DrawLine(
-                        new Pen(GridColor), 
-                        new Point((int)(i * VerticalLinesStep + MinIndent), MinIndent), 
+                        new Pen(GridColor),
+                        new Point((int)(i * VerticalLinesStep + MinIndent), MinIndent),
                         new Point((int)(i * VerticalLinesStep + MinIndent), PictureBox.Height - (MinIndent + 1))
                         );
 
@@ -121,8 +127,8 @@ namespace TransferСalculation
                 for (int i = 0; i <= HorisontalLiens; i++)
                 {
                     graphics.DrawLine(
-                        new Pen(GridColor), 
-                        new Point(MinIndent, (int)(i * HorisontallLinesStep + MinIndent)), 
+                        new Pen(GridColor),
+                        new Point(MinIndent, (int)(i * HorisontallLinesStep + MinIndent)),
                         new Point(PictureBox.Width - (MinIndent + 1), (int)(i * HorisontallLinesStep + MinIndent)));
                 }
             }
