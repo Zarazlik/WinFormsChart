@@ -12,22 +12,33 @@ namespace WinFormsChart
 {
     public partial class Chart : UserControl
     {
+        //TODO установить значения по умолчанию для возможности внесения элемента в форму без исключения
+
         #region
         public enum ChartStile { Line }
         [Description("Type of visual"), Category("Chart")]
-        public ChartStile chartStile { get; set; }
+        public ChartStile chartStile { get; set; } = ChartStile.Line;
+
+        [Category("Chart"), DefaultValue(10)]
+        public short NumberOfPoles { get; set; } = 10;
 
         [Category("Chart")]
-        public short NumberOfPoles { get; set; }
+        public int MaxValue { get; set; } = 100;
 
         [Category("Chart")]
-        public int MaxValue { get; set; }
+        public int MinValue { get; set; } = 0;
 
         [Category("Chart")]
-        public int MinValue { get; set; }
+        public float GreadVolumeStap { get; set; } = 5;
 
         [Category("Chart")]
-        public float GreadVolumeStap { get; set; }
+        public bool Ignore0;
+
+        [Category("Chart")]
+        public bool AdaptiveUp;
+
+        [Category("Chart")]
+        public bool AdaptiveDown;
         #endregion
 
         Image Table;
@@ -56,10 +67,9 @@ namespace WinFormsChart
         {
             PolesPositions = new ushort[NumberOfPoles];
 
-            DrawGread();
-            PictureBox.Image = Table;
+           DrawGread();
+           PictureBox.Image = Table;
         }
-
 
         public void Update(double[] Values, Color color)
         {
