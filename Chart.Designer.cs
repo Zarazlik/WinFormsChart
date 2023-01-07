@@ -51,7 +51,7 @@
             this.Controls.Add(this.PictureBox);
             this.Name = "Chart";
             this.Size = new System.Drawing.Size(500, 200);
-            this.Load += new System.EventHandler(this.UserControl1_Load);
+            this.Load += new System.EventHandler(this.Chart_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -59,6 +59,6 @@
 
         #endregion
 
-        private PictureBox PictureBox;
+        public PictureBox PictureBox;
     }
 }

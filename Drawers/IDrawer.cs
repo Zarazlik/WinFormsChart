@@ -8,6 +8,10 @@ namespace WinFormsChart.Drawers
 {
     internal interface IDrawer
     {
-        void Update(Chart000 Chart, float[][] Values, Color[] Colors);
+        Chart chart { set; }
+
+        void Update(float[][] Values, Color[] Colors);
+
+        void DrawGread();
     }
 }

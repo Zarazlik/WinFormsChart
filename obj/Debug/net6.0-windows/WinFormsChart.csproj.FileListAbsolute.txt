@@ -11,6 +11,5 @@ C:\My folder\Programing\WindowsForms\WinFormsChart\obj\Debug\net6.0-windows\WinF
 C:\My folder\Programing\WindowsForms\WinFormsChart\obj\Debug\net6.0-windows\refint\WinFormsChart.dll
 C:\My folder\Programing\WindowsForms\WinFormsChart\obj\Debug\net6.0-windows\WinFormsChart.pdb
 C:\My folder\Programing\WindowsForms\WinFormsChart\obj\Debug\net6.0-windows\ref\WinFormsChart.dll
-C:\My folder\Programing\WindowsForms\WinFormsChart\obj\Debug\net6.0-windows\WinFormsChart.Chart000.resources
 C:\My folder\Programing\WindowsForms\WinFormsChart\obj\Debug\net6.0-windows\WinFormsChart.Properties.Resources.resources
 C:\My folder\Programing\WindowsForms\WinFormsChart\obj\Debug\net6.0-windows\WinFormsChart.Chart.resources
