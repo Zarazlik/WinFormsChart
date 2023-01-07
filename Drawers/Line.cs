@@ -27,8 +27,7 @@ namespace WinFormsChart.Drawers
                 #region Point calculation
                 List<Point> Points = new List<Point>();
 
-                float factor = (float)(chart.PictureBox.Height - (chart.MinIndent * 2 + 1)) / (chart.MaxValue - chart.MinValue);
-
+                float factor = (chart.PictureBox.Height - (chart.MinIndent * 2 + 1)) / (chart.MaxValue - chart.MinValue);
                 for (int i = 0; i < mas.Length; i++)
                 {
                     if (chart.Ignore0)
@@ -46,7 +45,8 @@ namespace WinFormsChart.Drawers
 
                 void AddPoint(int i)
                 {
-                    Points.Add(new Point(chart.PolesPositions[i] + chart.MinIndent, (int)(chart.PictureBox.Height - (mas[i] * factor)) - (chart.MinIndent + 1)));
+                    Points.Add(new Point(chart.PolesPositions[i] + chart.MinIndent, 
+                        (int)(chart.PictureBox.Height - (mas[i] * factor - (chart.MinValue * factor))) - (chart.MinIndent + 1)));
                 }
                 #endregion
 
