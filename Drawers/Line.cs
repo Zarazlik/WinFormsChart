@@ -25,13 +25,29 @@ namespace WinFormsChart.Drawers
             foreach (float[] mas in Values)
             {
                 #region Point calculation
-                Point[] Points = new Point[chart.NumberOfPoles];
+                List<Point> Points = new List<Point>();
 
                 float factor = (float)(chart.PictureBox.Height - (chart.MinIndent * 2 + 1)) / (chart.MaxValue - chart.MinValue);
 
                 for (int i = 0; i < mas.Length; i++)
                 {
-                    Points[i] = new Point(chart.PolesPositions[i] + chart.MinIndent, (int)(chart.PictureBox.Height - (mas[i] * factor)) - (chart.MinIndent + 1));
+                    if (chart.Ignore0)
+                    {
+                        if (mas[i] != 0)
+                        {
+                            AddPoint(i);
+                        }
+                    }
+                    else
+                    {
+                        AddPoint(i);
+                    }
+                }
+
+                void AddPoint(int i)
+                {
+                    Points.Add(new Point(chart.PolesPositions[i] + chart.MinIndent, 
+                        (int)(chart.PictureBox.Height - (mas[i] * factor - (chart.MinValue * factor))) - (chart.MinIndent + 1)));
                 }
                 #endregion
 
@@ -42,7 +58,7 @@ namespace WinFormsChart.Drawers
 
                 using (var graphics = Graphics.FromImage(image))
                 {
-                    graphics.DrawLines(pen, Points);
+                    graphics.DrawLines(pen, Points.ToArray());
                 }
                 #endregion
             }
