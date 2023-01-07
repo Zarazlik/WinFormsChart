@@ -22,10 +22,10 @@ namespace WinFormsChart
         public short NumberOfPoles { get; set; } = 10;
 
         [Category("Chart")]
-        public float MaxValue { get; set; } = 100;
+        public int MaxValue { get; set; } = 100;
 
         [Category("Chart")]
-        public float MinValue { get; set; } = 0;
+        public int MinValue { get; set; } = 0;
 
         [Category("Chart")]
         public float GreadVolumeStap { get; set; } = 5;
