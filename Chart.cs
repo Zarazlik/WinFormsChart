@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsChart.Drawers;
 
 namespace WinFormsChart
 {
@@ -15,27 +16,36 @@ namespace WinFormsChart
         #region
         public enum ChartStile { Line }
         [Description("Type of visual"), Category("Chart")]
-        public ChartStile chartStile { get; set; }
+        public ChartStile chartStyle { get; set; } = ChartStile.Line;
+
+        [Category("Chart"), DefaultValue(10)]
+        public short NumberOfPoles { get; set; } = 10;
 
         [Category("Chart")]
-        public short NumberOfPoles { get; set; }
+        public int MaxValue { get; set; } = 100;
 
         [Category("Chart")]
-        public int MaxValue { get; set; }
+        public int MinValue { get; set; } = 0;
 
         [Category("Chart")]
-        public int MinValue { get; set; }
+        public float GreadVolumeStap { get; set; } = 5;
 
         [Category("Chart")]
-        public float GreadVolumeStap { get; set; }
+        public bool Ignore0 { get; set; } = false;
+
+        [Category("Chart")]
+        public bool AdaptiveUp;
+
+        [Category("Chart")]
+        public bool AdaptiveDown;
         #endregion
 
-        Image Table;
+        public Image Table;
 
-        byte MinIndent = 3;
-        int IndentX;
+        public byte MinIndent = 3;
+        public int IndentX;
 
-        ushort[] PolesPositions;
+        public ushort[] PolesPositions;
 
         Color[] Palette = new Color[6]
         {
@@ -47,105 +57,37 @@ namespace WinFormsChart
             Color.LightBlue
         };
 
+        IDrawer Drawer;
+
+
+
         public Chart()
         {
             InitializeComponent();
         }
 
-        private void UserControl1_Load(object sender, EventArgs e)
+        private void Chart_Load(object sender, EventArgs e)
         {
             PolesPositions = new ushort[NumberOfPoles];
 
-            DrawGread();
+            if (chartStyle == ChartStile.Line)
+            {
+                Drawer = new Line(this);
+            }
+
+            Drawer.DrawGread();
             PictureBox.Image = Table;
         }
 
 
-        public void Update(double[] Values, Color color)
+
+        public void Update(float[] Values, Color color)
         {
-            Point[] Points = new Point[NumberOfPoles];
-
-            double factor = (double)(PictureBox.Height - (MinIndent * 2 + 1)) / (MaxValue - MinValue);
-
-            for (int i = 0; i < Values.Length; i++)
-            {
-                Points[i] = new Point(PolesPositions[i] + MinIndent, (int)(PictureBox.Height - (Values[i] * factor)) - (MinIndent + 1));
-            }
-
-            Image image = DrawChartLine(color, Points);
-            PictureBox.Image = image;
+            Drawer.Update(new float[1][] { Values }, new Color[1] { color });
         }
-
-        
-        public void Update(double[][] Values)
+        public void Update(float[][] Values)
         {
-            if (chartStile == ChartStile.Line)
-            {
-                int palettecell = -1;
-                foreach (double[] mas in Values)
-                {
-                    Point[] Points = new Point[NumberOfPoles];
-
-                    double factor = (double)(PictureBox.Height - (MinIndent * 2 + 1)) / (MaxValue - MinValue);
-
-                    for (int i = 0; i < Values.Length; i++)
-                    {
-                        Points[i] = new Point(PolesPositions[i] + MinIndent, (int)(PictureBox.Height - (mas[i] * factor)) - (MinIndent + 1));
-                    }
-
-                    palettecell++;
-                    Image image = DrawChartLine(Palette[palettecell], Points);
-                    PictureBox.Image = image;
-                }
-            }
-        }
-
-        void DrawGread()
-        {
-            Table = new Bitmap(PictureBox.Width, PictureBox.Height);
-
-            Color GridColor = Color.FromArgb(130, 130, 130);
-
-            ushort HorisontalLiens = (ushort)((MaxValue - MinValue) / GreadVolumeStap);
-
-            float VerticalLinesStep = (float)(PictureBox.Width - (MinIndent * 2 + 1)) / (NumberOfPoles - 1);
-            float HorisontallLinesStep = (float)(PictureBox.Height - (MinIndent * 2 + 1)) / HorisontalLiens;
-
-            using (var graphics = Graphics.FromImage(Table))
-            {
-                for (int i = 0; i < NumberOfPoles; i++)
-                {
-                    graphics.DrawLine(
-                        new Pen(GridColor),
-                        new Point((int)(i * VerticalLinesStep + MinIndent), MinIndent),
-                        new Point((int)(i * VerticalLinesStep + MinIndent), PictureBox.Height - (MinIndent + 1))
-                        );
-
-                    PolesPositions[i] = (ushort)(i * VerticalLinesStep + IndentX);
-                }
-
-                for (int i = 0; i <= HorisontalLiens; i++)
-                {
-                    graphics.DrawLine(
-                        new Pen(GridColor),
-                        new Point(MinIndent, (int)(i * HorisontallLinesStep + MinIndent)),
-                        new Point(PictureBox.Width - (MinIndent + 1), (int)(i * HorisontallLinesStep + MinIndent)));
-                }
-            }
-        }
-
-        Image DrawChartLine(Color color, Point[] points)
-        {
-            Image image = Table.Clone() as Image;
-            Pen pen = new Pen(color);
-            pen.Width = 2;
-
-            using (var graphics = Graphics.FromImage(image))
-            {
-                graphics.DrawLines(pen, points);
-            }
-
-            return image;
+            Drawer.Update(Values, Palette);
         }
     }
 }

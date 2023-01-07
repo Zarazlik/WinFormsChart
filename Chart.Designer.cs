@@ -44,14 +44,14 @@
             this.PictureBox.TabIndex = 13;
             this.PictureBox.TabStop = false;
             // 
-            // UserControl1
+            // Chart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.PictureBox);
-            this.Name = "UserControl1";
+            this.Name = "Chart";
             this.Size = new System.Drawing.Size(500, 200);
-            this.Load += new System.EventHandler(this.UserControl1_Load);
+            this.Load += new System.EventHandler(this.Chart_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -59,6 +59,6 @@
 
         #endregion
 
-        private PictureBox PictureBox;
+        public PictureBox PictureBox;
     }
 }
