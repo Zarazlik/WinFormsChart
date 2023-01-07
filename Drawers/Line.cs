@@ -46,7 +46,8 @@ namespace WinFormsChart.Drawers
 
                 void AddPoint(int i)
                 {
-                    Points.Add(new Point(chart.PolesPositions[i] + chart.MinIndent, (int)(chart.PictureBox.Height - (mas[i] * factor)) - (chart.MinIndent + 1)));
+                    Points.Add(new Point(chart.PolesPositions[i] + chart.MinIndent, 
+                        (int)(chart.PictureBox.Height - (mas[i] * factor - (chart.MinValue * factor))) - (chart.MinIndent + 1)));
                 }
                 #endregion
 
