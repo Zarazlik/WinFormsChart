@@ -14,30 +14,45 @@ namespace WinFormsChart
     public partial class Chart : UserControl
     {
         #region
-        public enum ChartStile { Line }
-        [Description("Type of visual"), Category("Chart")]
+        [Category("Chart")]
+        [Description("Type of visual")]
         public ChartStile chartStyle { get; set; } = ChartStile.Line;
+        public enum ChartStile { Line }
 
-        [Category("Chart"), DefaultValue(10)]
+        [Category("Chart")]
+        [Description("Number of vertical lines on the x-axis that will display values \r\n" +
+            "If the number of values exceeds the number of lines, then some of the values will not be displayed. " +
+            "If the number of values is less than the number of lines, the empty values will be 0.")]
         public short NumberOfPoles { get; set; } = 10;
 
         [Category("Chart")]
-        public int MaxValue { get; set; } = 100;
-
-        [Category("Chart")]
-        public int MinValue { get; set; } = 0;
-
-        [Category("Chart")]
+        [Description("Number of vertical lines on the y-axis")]
         public float GreadVolumeStap { get; set; } = 5;
 
         [Category("Chart")]
+        [Description("Maximum value displayed by chart")]
+        public int MaxValue { get; set; } = 100;
+
+        [Category("Chart")]
+        [Description("Minimum value displayed by chart")]
+        public int MinValue { get; set; } = 0;
+
+        [Category("Chart")]
+        [Description("If TRUE, values equal to 0 will be pass")]
         public bool Ignore0 { get; set; } = false;
 
+        /*
         [Category("Chart")]
         public bool AdaptiveUp;
 
         [Category("Chart")]
         public bool AdaptiveDown;
+        */
+
+        [Category("Chart")]
+        //[Description("Line boldness")]
+        [DefaultValue(2)]
+        public int LineBoldnes { get; set; } = 2;
         #endregion
 
         public Image Table;

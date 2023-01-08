@@ -53,7 +53,7 @@ namespace WinFormsChart.Drawers
 
                 #region Drawning
                 Pen pen = new Pen(colors[colorID]);
-                pen.Width = 2;
+                pen.Width = chart.LineBoldnes;
                 colorID++;
 
                 using (var graphics = Graphics.FromImage(image))
