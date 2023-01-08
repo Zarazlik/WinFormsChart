@@ -31,11 +31,11 @@ namespace WinFormsChart
 
         [Category("Chart")]
         [Description("Maximum value displayed by chart")]
-        public int MaxValue { get; set; } = 100;
+        public float MaxValue { get; set; } = 100;
 
         [Category("Chart")]
         [Description("Minimum value displayed by chart")]
-        public int MinValue { get; set; } = 0;
+        public float MinValue { get; set; } = 0;
 
         [Category("Chart")]
         [Description("If TRUE, values equal to 0 will be pass")]
@@ -52,7 +52,7 @@ namespace WinFormsChart
         [Category("Chart")]
         //[Description("Line boldness")]
         [DefaultValue(2)]
-        public int LineBoldnes { get; set; } = 2;
+        public float LineBoldnes { get; set; } = 2;
         #endregion
 
         public Image Table;
