@@ -17,16 +17,16 @@ namespace WinFormsChart
         [Category("Chart")]
         [Description("Type of visual")]
         public ChartStile chartStyle { get; set; } = ChartStile.Line;
-        public enum ChartStile { Line }
+        public enum ChartStile { Line, LineWithPoints }
 
         [Category("Chart")]
-        [Description("Number of vertical lines on the x-axis that will display values \r\n" +
-            "If the number of values exceeds the number of lines, then some of the values will not be displayed. " +
-            "If the number of values is less than the number of lines, the empty values will be 0.")]
-        public short NumberOfPoles { get; set; } = 10;
+        [Description("Аmount of vertical lines on the x-axis that will display values \r\n" +
+            "If the amount of values exceeds the amount of lines, then some of the values will not be displayed. " +
+            "If the amount of values is less than the amount of lines, the empty values will be 0.")]
+        public short AmountOfPoles { get; set; } = 10;
 
         [Category("Chart")]
-        [Description("Number of vertical lines on the y-axis")]
+        [Description("Amount of vertical lines on the y-axis")]
         public float GreadVolumeStap { get; set; } = 5;
 
         [Category("Chart")]
@@ -47,6 +47,9 @@ namespace WinFormsChart
 
         [Category("Chart")]
         public bool AdaptiveDown;
+
+        [Category("Chart")]
+        public bool RightToLeft;
         */
 
         [Category("Chart")]
@@ -83,11 +86,15 @@ namespace WinFormsChart
 
         private void Chart_Load(object sender, EventArgs e)
         {
-            PolesPositions = new ushort[NumberOfPoles];
+            PolesPositions = new ushort[AmountOfPoles];
 
             if (chartStyle == ChartStile.Line)
             {
-                Drawer = new Line(this);
+                Drawer = new Line(this, false);
+            }
+            else if (chartStyle == ChartStile.LineWithPoints)
+            {
+                Drawer = new Line(this, true);
             }
 
             Drawer.DrawGread();
