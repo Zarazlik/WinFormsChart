@@ -11,10 +11,12 @@ namespace WinFormsChart.Drawers
     internal class Line : IDrawer
     {
         public Chart chart { get; set; }
+        bool drawPoints;
 
-        public Line(Chart chart)
+        public Line(Chart chart, bool drawPoints)
         {
             this.chart = chart;
+            this.drawPoints = drawPoints;
         }
 
         void IDrawer.Update(float[][] Values, Color[] colors)
@@ -27,7 +29,7 @@ namespace WinFormsChart.Drawers
                 #region Point calculation
                 List<Point> Points = new List<Point>();
 
-                float factor = (float)(chart.PictureBox.Height - (chart.MinIndent * 2 + 1)) / (chart.MaxValue - chart.MinValue);
+                float factor = (chart.PictureBox.Height - (chart.MinIndent * 2 + 1)) / (chart.MaxValue - chart.MinValue);
 
                 for (int i = 0; i < mas.Length; i++)
                 {
@@ -59,6 +61,13 @@ namespace WinFormsChart.Drawers
                 using (var graphics = Graphics.FromImage(image))
                 {
                     graphics.DrawLines(pen, Points.ToArray());
+                    if(drawPoints)
+                    {
+                        foreach (var point in Points)
+                        {
+                            graphics.DrawEllipse(pen, point.X - 2, point.Y - 2, 5, 5);
+                        }
+                    }
                 }
                 #endregion
             }
@@ -74,12 +83,12 @@ namespace WinFormsChart.Drawers
 
             ushort HorisontalLiens = (ushort)((chart.MaxValue - chart.MinValue) / chart.GreadVolumeStap);
 
-            float VerticalLinesStep = (float)(chart.PictureBox.Width - (chart.MinIndent * 2 + 1)) / (chart.NumberOfPoles - 1);
+            float VerticalLinesStep = (float)(chart.PictureBox.Width - (chart.MinIndent * 2 + 1)) / (chart.AmountOfPoles - 1);
             float HorisontallLinesStep = (float)(chart.PictureBox.Height - (chart.MinIndent * 2 + 1)) / HorisontalLiens;
 
             using (var graphics = Graphics.FromImage(chart.Table))
             {
-                for (int i = 0; i < chart.NumberOfPoles; i++)
+                for (int i = 0; i < chart.AmountOfPoles; i++)
                 {
                     graphics.DrawLine(
                         new Pen(GridColor),
