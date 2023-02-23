@@ -13,7 +13,8 @@ namespace WinFormsChart
 {
     public partial class Chart : UserControl
     {
-        #region
+        #region Propertyes
+
         [Category("Chart")]
         [Description("Type of visual")]
         public ChartStile chartStyle { get; set; } = ChartStile.Line;
@@ -58,6 +59,7 @@ namespace WinFormsChart
         public float LineBoldnes { get; set; } = 2;
         #endregion
 
+        #region Variables
         public Image Table;
 
         public byte MinIndent = 3;
@@ -77,7 +79,12 @@ namespace WinFormsChart
 
         IDrawer Drawer;
 
+        float[][] BackapPoints;
+        Color[] BackapColors;
 
+        bool FerstResize = true;
+
+        #endregion
 
         public Chart()
         {
@@ -99,17 +106,38 @@ namespace WinFormsChart
 
             Drawer.DrawGread();
             PictureBox.Image = Table;
+            FerstResize= false;
         }
 
-
+        #region Update voids
 
         public void Update(float[] Values, Color color)
         {
             Drawer.Update(new float[1][] { Values }, new Color[1] { color });
+
+            BackapPoints = new float[1][] { Values };
+            BackapColors = new Color[1] { color };
         }
         public void Update(float[][] Values)
         {
             Drawer.Update(Values, Palette);
+
+            BackapPoints = Values;
+            BackapColors = Palette;
+        }
+
+        #endregion
+
+        private void Chart_Resize(object sender, EventArgs e)
+        {
+            if (!FerstResize)
+            {
+                if (PictureBox.Size.Width > 0 && PictureBox.Size.Height > 0)
+                {
+                    Drawer.DrawGread();
+                    Drawer.Update(BackapPoints, BackapColors);
+                }
+            }
         }
     }
 }
