@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\My folder\\Programing\\WindowsForms\\WinFormsChart\\WinFormsChart.csproj": {}
+    "C:\\My folder\\Programing\\WindowsForms\\My Framworks WinForms\\UserControls\\WinFormsChart\\WinFormsChart.csproj": {}
   },
   "projects": {
-    "C:\\My folder\\Programing\\WindowsForms\\WinFormsChart\\WinFormsChart.csproj": {
+    "C:\\My folder\\Programing\\WindowsForms\\My Framworks WinForms\\UserControls\\WinFormsChart\\WinFormsChart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\My folder\\Programing\\WindowsForms\\WinFormsChart\\WinFormsChart.csproj",
+        "projectUniqueName": "C:\\My folder\\Programing\\WindowsForms\\My Framworks WinForms\\UserControls\\WinFormsChart\\WinFormsChart.csproj",
         "projectName": "WinFormsChart",
-        "projectPath": "C:\\My folder\\Programing\\WindowsForms\\WinFormsChart\\WinFormsChart.csproj",
+        "projectPath": "C:\\My folder\\Programing\\WindowsForms\\My Framworks WinForms\\UserControls\\WinFormsChart\\WinFormsChart.csproj",
         "packagesPath": "C:\\Users\\Zaraz\\.nuget\\packages\\",
-        "outputPath": "C:\\My folder\\Programing\\WindowsForms\\WinFormsChart\\obj\\",
+        "outputPath": "C:\\My folder\\Programing\\WindowsForms\\My Framworks WinForms\\UserControls\\WinFormsChart\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Zaraz\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -58,7 +58,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

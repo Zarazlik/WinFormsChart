@@ -38,20 +38,23 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PictureBox.BackColor = System.Drawing.SystemColors.Window;
-            this.PictureBox.Location = new System.Drawing.Point(3, 3);
+            this.PictureBox.Location = new System.Drawing.Point(3, 2);
+            this.PictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(494, 194);
+            this.PictureBox.Size = new System.Drawing.Size(432, 146);
             this.PictureBox.TabIndex = 13;
             this.PictureBox.TabStop = false;
             // 
             // Chart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.PictureBox);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Chart";
-            this.Size = new System.Drawing.Size(500, 200);
+            this.Size = new System.Drawing.Size(438, 150);
             this.Load += new System.EventHandler(this.Chart_Load);
+            this.Resize += new System.EventHandler(this.Chart_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
 

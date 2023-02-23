@@ -65,7 +65,10 @@ namespace WinFormsChart.Drawers
                     {
                         foreach (var point in Points)
                         {
-                            graphics.DrawEllipse(pen, point.X - pen.Width, point.Y - pen.Width, pen.Width * 2, pen.Width * 2);
+                            float PointWidth = 1.5f;
+                            graphics.FillEllipse(new SolidBrush(pen.Color), 
+                                point.X - pen.Width * PointWidth, point.Y - pen.Width * PointWidth,
+                                pen.Width * (PointWidth * 2), pen.Width * (PointWidth * 2));
                         }
                     }
                 }
